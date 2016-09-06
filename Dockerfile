@@ -16,6 +16,7 @@ RUN /etc/my_init.d/00_regen_ssh_host_keys.sh
 CMD ["/sbin/my_init"]
 ENV DEBIAN_FRONTEND noninteractive
 
+# todo remove sudo
 RUN apt-get update \
     && apt-get install -y \
     libsqlite3-0 \
@@ -26,6 +27,7 @@ RUN apt-get update \
     unzip \
     nginx \
     python \
+    default-jre \
     php7.0 \
     php7.0-fpm \
     php7.0-cli \
@@ -39,7 +41,9 @@ RUN apt-get update \
     php7.0-zip \
     php7.0-dom \
     php7.0-mbstring \
-    wkhtmltopdf
+    wkhtmltopdf \
+    xvfb \
+    whois
 
 RUN apt-get clean \
 	&& rm -rf /var/lib/apt/lists/* \
