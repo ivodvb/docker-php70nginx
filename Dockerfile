@@ -2,7 +2,7 @@
 ## Docker URL: https://hub.docker.com/r/ivodvb/php70nginx
 ## Ubuntu 16.04
 #############################################################################
-FROM phusion/baseimage:0.9.19
+FROM phusion/baseimage:0.9.21
 
 # EDITED AND MAINTAINED BY Ivo van Beek <idvbeek@gmail.com>
 # BUILT BY Mahmoud Zalt <mahmoud@zalt.me>
