@@ -2,7 +2,7 @@
 ## Docker URL: https://hub.docker.com/r/ivodvb/php70nginx
 ## Ubuntu 16.04
 #############################################################################
-FROM phusion/baseimage:0.9.21
+FROM phusion/baseimage:0.9.22
 
 # EDITED AND MAINTAINED BY Ivo van Beek <idvbeek@gmail.com>
 # BUILT BY Mahmoud Zalt <mahmoud@zalt.me>
@@ -20,14 +20,12 @@ ENV DEBIAN_FRONTEND noninteractive
 RUN apt-get update \
     && apt-get install -y \
     libsqlite3-0 \
-    memcached \
     git \
     sudo \
     zip \
     unzip \
     nginx \
     python \
-    default-jre \
     php7.0 \
     php7.0-fpm \
     php7.0-cli \
@@ -42,7 +40,6 @@ RUN apt-get update \
     php7.0-dom \
     php7.0-mbstring \
     wkhtmltopdf \
-    xvfb \
     whois
 
 RUN apt-get clean \
@@ -64,11 +61,6 @@ RUN chmod +x /etc/service/nginx/run
 RUN mkdir /etc/service/phpfpm
 ADD build/php/run.sh /etc/service/phpfpm/run
 RUN chmod +x /etc/service/phpfpm/run
-
-# Add memcached service
-RUN mkdir /etc/service/memcached
-ADD build/memcached/run.sh /etc/service/memcached/run
-RUN chmod +x /etc/service/memcached/run
 
 VOLUME ["/var/www", "/etc/nginx/sites-available", "/etc/nginx/sites-enabled"]
 
