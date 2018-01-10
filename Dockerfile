@@ -16,7 +16,8 @@ RUN /etc/my_init.d/00_regen_ssh_host_keys.sh
 CMD ["/sbin/my_init"]
 ENV DEBIAN_FRONTEND noninteractive
 
-# todo remove sudo
+RUN add-apt-repository ppa:certbot/certbot -y
+
 RUN apt-get update \
     && apt-get install -y \
     libsqlite3-0 \
@@ -40,7 +41,13 @@ RUN apt-get update \
     php7.0-dom \
     php7.0-mbstring \
     wkhtmltopdf \
-    whois
+    whois \
+    python-certbot-nginx \
+    php-xdebug
+
+RUN echo 'xdebug.remote_enable=1\nxdebug.remote_port=9000\nxdebug.remote_connect_back=On' >> /etc/php/7.0/fpm/conf.d/20-xdebug.ini
+# Remove xdebug cli, to improve performance for composer
+RUN rm /etc/php/7.0/cli/conf.d/20-xdebug.ini
 
 RUN apt-get clean \
 	&& rm -rf /var/lib/apt/lists/* \
